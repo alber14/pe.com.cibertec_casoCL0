@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+<html xmlns:th="http://www.thymeleaf.org" >
+    <head>
+        <title>listado</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+         <div class="w3-container w3-center">
+         <h1 class="text-center">LISTADO</h1>
+        </div>
+ 
+          <p><button class="w3-button w3-green">  <a th:href="@{/agregar}" >Crear</a></button></p>
+
+        <div th:if="${customer != null   and   !customer.empty }"     >
+
+            <table  border="1"  >
+                <tr>
+                    <th>Nombre </th>  
+                    <th>Telefono </th>
+                    <th>Email </th>
+                    <th>Editar </th>
+                    <th>Eliminar </th>
+                </tr>
+                <tr th:each="customer : ${customer}"     >
+                    <td  th:text="${customer.nombre}"      > Mostrar nombre  </td>  
+                    <td  th:text="${customer.telefono}"      > Mostrar telefono  </td>
+                    <td  th:text="${customer.correo}"      > Mostrar email  </td> 
+                    <td><button class="w3-button w3-green"><a th:href="@{/editar/} + ${customer.id_customer} " th:text="Editar"   /> </button></td>
+                    <td><button class="w3-button w3-red"><a th:href="@{/eliminar/} + ${customer.id_customer} " th:text="Eliminar"  /> </button></td> 
+                </tr>
+                
+            </table>
+
+        </div>
+    <div  th:if="${customer == null  or customer.empty }"   >
+    
+        La lista está vacía
+    
+    </div>
+    </body>
+</html>
